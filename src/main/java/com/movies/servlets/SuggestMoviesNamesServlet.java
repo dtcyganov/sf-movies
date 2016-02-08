@@ -30,7 +30,7 @@ public class SuggestMoviesNamesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String phrase = req.getParameter("phrase");
+        String phrase = req.getParameter("term");
         List<Movie> movies = service.findMoviesBySearchPhrase(phrase, LIMIT);
 
         resp.setContentType("application/json");
