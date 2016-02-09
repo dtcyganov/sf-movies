@@ -13,8 +13,8 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.google.appengine.repackaged.com.google.common.base.StringUtil.isEmptyOrWhitespace;
-import static com.google.appengine.repackaged.com.google.common.collect.Iterables.isEmpty;
+import static com.google.common.collect.Iterables.isEmpty;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.http.HttpStatus.*;
 
 /**
@@ -68,7 +68,7 @@ public class MovieServlet extends HttpServlet {
             return;
         }
 
-        if (isEmptyOrWhitespace(movie.getTitle()) || isEmpty(movie.getLocations()) ||
+        if (isBlank(movie.getTitle()) || isEmpty(movie.getLocations()) ||
                 movie.getId() != null && !movie.getId().equals(id)) {
             resp.setStatus(SC_BAD_REQUEST);
             return;
@@ -90,7 +90,7 @@ public class MovieServlet extends HttpServlet {
             return;
         }
 
-        if (isEmptyOrWhitespace(movie.getTitle()) || isEmpty(movie.getLocations()) || movie.getId() != null) {
+        if (isBlank(movie.getTitle()) || isEmpty(movie.getLocations()) || movie.getId() != null) {
             resp.setStatus(SC_BAD_REQUEST);
             return;
         }

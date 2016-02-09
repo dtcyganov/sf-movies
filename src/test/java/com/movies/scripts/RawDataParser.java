@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.*;
 
-import static com.google.appengine.repackaged.com.google.common.base.StringUtil.isEmptyOrWhitespace;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
  * Parses movies data taken from
@@ -47,7 +47,7 @@ public class RawDataParser {
             if (movie == null) {
                 ArrayList<Actor> actors = new ArrayList<>();
                 for (String actor : Arrays.asList(actor1, actor2, actor3)) {
-                    if (!isEmptyOrWhitespace(actor)) {
+                    if (!isBlank(actor)) {
                         actors.add(new Actor(actor));
                     }
                 }

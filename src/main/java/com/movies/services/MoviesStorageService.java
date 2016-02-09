@@ -1,8 +1,8 @@
 package com.movies.services;
 
 import com.google.appengine.api.datastore.Query;
-import com.google.appengine.repackaged.com.google.common.base.StringUtil;
 import com.movies.domain.Movie;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +48,7 @@ public class MoviesStorageService {
      * @return found movies
      */
     public List<Movie> findMoviesBySearchPhrase(String phrase, int limit) {
-        if (StringUtil.isEmptyOrWhitespace(phrase)) {
+        if (StringUtils.isBlank(phrase)) {
             return ofy().load().type(Movie.class).
                     order("title").
                     limit(limit).

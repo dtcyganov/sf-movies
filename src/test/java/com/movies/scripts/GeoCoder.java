@@ -1,10 +1,11 @@
 package com.movies.scripts;
 
-import com.google.appengine.repackaged.org.apache.http.HttpResponse;
-import com.google.appengine.repackaged.org.apache.http.client.methods.HttpGet;
-import com.google.appengine.repackaged.org.apache.http.impl.client.DefaultHttpClient;
 import com.google.gson.Gson;
 import com.movies.domain.Location;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,7 +21,7 @@ public class GeoCoder {
 
     private static final String GOOGLE_GEOCODE_URL = "https://maps.googleapis.com/maps/api/geocode/json";
 
-    private DefaultHttpClient httpClient = new DefaultHttpClient();
+    private CloseableHttpClient httpClient = HttpClients.createDefault();
     private Gson gson = new Gson();
 
     // class used for json deserialization
@@ -49,18 +50,16 @@ public class GeoCoder {
         String encoded = URLEncoder.encode(place, "UTF-8");
         HttpGet request = new HttpGet(GOOGLE_GEOCODE_URL + "?key=" + GOOGLE_MAPS_KEY + "&address=" + encoded);
 
-        GeoCodeResults geoCodeResults = null;
-        try {
-            HttpResponse response = httpClient.execute(request);
+        final GeoCodeResults geoCodeResults;
+        try (CloseableHttpResponse response = httpClient.execute(request)) {
             int statusCode = response.getStatusLine().getStatusCode();
             if (statusCode != 200) {
                 throw new RuntimeException("Failed to code place : " + place + ", code : " + statusCode);
             }
 
-            InputStreamReader reader = new InputStreamReader(response.getEntity().getContent());
-            geoCodeResults = gson.fromJson(reader, GeoCodeResults.class);
-        } finally {
-            request.releaseConnection();
+            try (InputStreamReader reader = new InputStreamReader(response.getEntity().getContent())) {
+                geoCodeResults = gson.fromJson(reader, GeoCodeResults.class);
+            }
         }
 
         return geoCodeResultsToLocation(place, geoCodeResults);

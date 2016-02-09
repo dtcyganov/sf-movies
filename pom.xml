@@ -54,6 +54,11 @@
             <artifactId>objectify</artifactId>
             <version>5.1.10</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
+        </dependency>
 
         <!-- Test Dependencies -->
         <dependency>
@@ -67,6 +72,11 @@
             <artifactId>appengine-api-stubs</artifactId>
             <version>${appengine.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.1</version>
         </dependency>
     </dependencies>
 
