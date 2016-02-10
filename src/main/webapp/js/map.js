@@ -1,5 +1,8 @@
+var map;
+var markers = [];
+
 function initMap() {
-    var map = new google.maps.Map($('#map')[0], {
+    map = new google.maps.Map($('#map')[0], {
         center: {lat: 37.7749295, lng: -122.4194155}, // San Francisco
         zoom: 12,
     });
@@ -11,28 +14,23 @@ function initMap() {
 function createAutoCompleteControl(map) {
     var div = document.createElement('div');
     var input = $('<input></input>').
-        attr({type: 'text'});
+        attr({type: 'text'}).
+        addClass('topic-title');
 
-    input.autocomplete({
-        autoFocus: true,
-        delay: 0,
-        minLength: 0,
-        source: "/api/v1/suggest-movies-names",
-
-        response: function(event, ui) {
-            $.each(ui.content, function(key,value) {
-                value.value = value.title;
-                value.label = value.title;
+    addAutoComplete(input, function(item) {
+        $.each(markers, function(key,marker) {
+            marker.setMap(null);
+        });
+        markers = [];
+        $.each(item.locations, function(key,location) {
+            var marker = new google.maps.Marker({
+                position: location,
+                map: map,
+                title: location.name
             });
-        },
-
-        select: function(event, ui) {
-            var url = ui.item.id;
-            alert("Selected movie : " + ui.item.title + " #" + ui.item.id);
-        },
+            markers.push(marker);
+        });
     });
-    input.addClass('topic-title');
-
 
     return $('<div></div>').append(input)[0];
 }

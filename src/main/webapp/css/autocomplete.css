@@ -1,7 +1,18 @@
 .topic-title {
     width: 400px;
     margin-left: 10px;
-    margin-top: 10px;
-    font-family: Verdana,Arial,sans-serif;
-    font-size: 1.7em;
+    margin-top: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 15px;
+}
+
+.ui-widget {
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 15px;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
