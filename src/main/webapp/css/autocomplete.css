@@ -1,7 +1,7 @@
-body {
-	font-size: 75%;
-}
-
-#topic_title {
-    width: 500px;
+.topic-title {
+    width: 400px;
+    margin-left: 10px;
+    margin-top: 10px;
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 1.7em;
 }

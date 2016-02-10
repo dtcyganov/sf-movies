@@ -6,13 +6,17 @@
 
     <link rel="stylesheet" type="text/css" href="/lib/jquery/css/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="/css/autocomplete.css">
+    <link rel="stylesheet" type="text/css" href="/css/map.css">
 
     <script type="text/javascript" src="/lib/jquery/js/jquery.js"></script>
     <script type="text/javascript" src="/lib/jquery/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/js/autocomplete.js"></script>
+    <script type="text/javascript" src="/js/map.js"></script>
 </head>
 
 <body>
-    <input type="text" id="topic_title" class="ui-widget">
+    <div id="map"></div>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoncLWwIF3WglJHYHYyE3l00EjVki7ls4&libraries=visualization&callback=initMap">
+    </script>
 </body>
 </html>
