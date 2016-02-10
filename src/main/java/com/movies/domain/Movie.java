@@ -28,10 +28,10 @@ public class Movie {
     private int releaseYear;
     private String productionCompany;
     private String distributor;
-    private String director;
-    private String writers;
+    private List<Person> directors;
+    private List<Person> writers;
     private Collection<Location> locations;
-    private List<Actor> actors;
+    private List<Person> actors;
 
     /**
      * This index used for auto-complete.
@@ -49,17 +49,17 @@ public class Movie {
                  int releaseYear,
                  String productionCompany,
                  String distributor,
-                 String director,
-                 String writers,
+                 List<Person> directors,
+                 List<Person> writers,
                  Collection<Location> locations,
-                 List<Actor> actors) {
+                 List<Person> actors) {
 
         this.id = id;
         this.title = title;
         this.releaseYear = releaseYear;
         this.productionCompany = productionCompany;
         this.distributor = distributor;
-        this.director = director;
+        this.directors = directors;
         this.writers = writers;
         this.locations = locations;
         this.actors = actors;

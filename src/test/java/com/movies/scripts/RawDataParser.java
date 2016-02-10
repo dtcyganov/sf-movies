@@ -1,7 +1,7 @@
 package com.movies.scripts;
 
 import com.google.gson.Gson;
-import com.movies.domain.Actor;
+import com.movies.domain.Person;
 import com.movies.domain.Location;
 import com.movies.domain.Movie;
 
@@ -32,7 +32,7 @@ public class RawDataParser {
         Map<String, Movie> moviesMap = new LinkedHashMap<>();
         reader.close();
         for (List<String> row : dataSet.data) {
-            String title = row.get(8);
+            String title = row.get(8).trim();
             int releaseYear = Integer.parseInt(row.get(9));
             String location = row.get(10);
             String productionCompany = row.get(12);
@@ -45,21 +45,35 @@ public class RawDataParser {
 
             Movie movie = moviesMap.get(title);
             if (movie == null) {
-                ArrayList<Actor> actors = new ArrayList<>();
-                for (String actor : Arrays.asList(actor1, actor2, actor3)) {
-                    if (!isBlank(actor)) {
-                        actors.add(new Actor(actor));
-                    }
-                }
-                movie = new Movie(null, title, releaseYear,
-                        productionCompany, distributor, director, writers,
-                        new ArrayList<Location>(), actors);
+                movie = new Movie(null,
+                        title,
+                        releaseYear,
+                        productionCompany,
+                        distributor,
+                        getPersonsFromString(director),
+                        getPersonsFromString(writers),
+                        new ArrayList<Location>(),
+                        getPersonsFromArray(actor1, actor2, actor3));
 
                 moviesMap.put(title, movie);
             }
             movie.getLocations().add(new Location(location == null ? "" : location.trim()));
         }
         return moviesMap.values();
+    }
+
+    private List<Person> getPersonsFromString(String s) {
+        return isBlank(s) ? Collections.<Person>emptyList() : getPersonsFromArray(s.split(",|&"));
+    }
+
+    private List<Person> getPersonsFromArray(String... persons) {
+        ArrayList<Person> result = new ArrayList<>();
+        for (String person : persons) {
+            if (!isBlank(person)) {
+                result.add(new Person(person.trim()));
+            }
+        }
+        return result;
     }
 
 }
