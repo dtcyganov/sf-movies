@@ -115,6 +115,9 @@ public class MovieServlet extends HttpServlet {
     }
 
     private static Long getId(HttpServletRequest req) {
+        if (req.getPathInfo() == null) {
+            return null;
+        }
         Matcher matcher = idPattern.matcher(req.getPathInfo());
         if (!matcher.matches()) {
             return null;
