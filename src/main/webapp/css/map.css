@@ -7,3 +7,33 @@ html, body {
 #map {
     height: 100%;
 }
+
+.movie-description-control {
+    border: 2px solid rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 6px;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    margin-top:   40px;
+    margin-right: 10px;
+    width:  250px;
+    height: 350px;
+    text-align: left;
+}
+
+.movie-description-title {
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 25px;
+    padding-top:    10px;
+    padding-right:  7px;
+    padding-bottom: 10px;
+    padding-left:   7px;
+}
+
+.movie-description-content {
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+    padding-left: 7px;
+    padding-right: 7px;
+}
