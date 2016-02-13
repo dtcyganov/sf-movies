@@ -72,7 +72,7 @@ function personsElement(fieldName, fieldNamePlural, items) {
         .append($('<br/>'))
         .append(
             $.map(items, function(v) {
-                return $('<span style="color: #136CB2">' + v.name + '</span><br/>');
+                return $('<span>' + v.name + '</span><br/>');
             })
         )
 }
