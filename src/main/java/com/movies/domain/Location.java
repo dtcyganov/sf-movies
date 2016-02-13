@@ -33,6 +33,13 @@ public class Location {
         this.name = name;
     }
 
+    public Location(String name, String address, double lat, double lng) {
+        this.name = name;
+        this.address = address;
+        this.lat = lat;
+        this.lng = lng;
+    }
+
     public String getName() {
         return name;
     }

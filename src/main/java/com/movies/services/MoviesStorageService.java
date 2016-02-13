@@ -5,6 +5,7 @@ import com.movies.domain.Movie;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
@@ -48,6 +49,9 @@ public class MoviesStorageService {
      * @return found movies
      */
     public List<Movie> findMoviesBySearchPhrase(String phrase, int limit) {
+        if (limit == 0) {
+            return Collections.emptyList();
+        }
         if (StringUtils.isBlank(phrase)) {
             return ofy().load().type(Movie.class).
                     order("title").
