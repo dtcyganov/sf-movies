@@ -2,6 +2,7 @@ package com.movies.servlets;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonWriter;
+import com.movies.domain.Location;
 import com.movies.domain.Movie;
 import com.movies.services.MoviesStorageService;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -68,8 +70,7 @@ public class MovieServlet extends HttpServlet {
             return;
         }
 
-        if (isBlank(movie.getTitle()) || isEmpty(movie.getLocations()) ||
-                movie.getId() != null && !movie.getId().equals(id)) {
+        if (!isMovieValid(movie) || movie.getId() != null && !movie.getId().equals(id)) {
             resp.setStatus(SC_BAD_REQUEST);
             return;
         }
@@ -90,7 +91,7 @@ public class MovieServlet extends HttpServlet {
             return;
         }
 
-        if (isBlank(movie.getTitle()) || isEmpty(movie.getLocations()) || movie.getId() != null) {
+        if (!isMovieValid(movie) || movie.getId() != null) {
             resp.setStatus(SC_BAD_REQUEST);
             return;
         }
@@ -112,6 +113,20 @@ public class MovieServlet extends HttpServlet {
             return;
         }
         service.deleteMovieById(id);
+    }
+
+    private boolean isMovieValid(Movie movie) {
+        return !isBlank(movie.getTitle()) && !isEmpty(movie.getLocations()) && isLocationsValid(movie.getLocations());
+    }
+
+    private boolean isLocationsValid(Collection<Location> locations) {
+        for (Location location : locations) {
+            if (location.getName() == null || location.getAddress() == null ||
+                    location.getLat() == 0 && location.getLng() == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private static Long getId(HttpServletRequest req) {
