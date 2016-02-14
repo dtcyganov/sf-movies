@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <servlet>
-        <servlet-name>suggestMoviesNames</servlet-name>
-        <servlet-class>com.movies.servlets.SuggestMoviesNamesServlet</servlet-class>
+        <servlet-name>findMovies</servlet-name>
+        <servlet-class>com.movies.servlets.FindMoviesServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>movie</servlet-name>
@@ -10,8 +10,8 @@
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>suggestMoviesNames</servlet-name>
-        <url-pattern>/api/v1/suggest-movies-names</url-pattern>
+        <servlet-name>findMovies</servlet-name>
+        <url-pattern>/api/v1/find-movies</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>movie</servlet-name>

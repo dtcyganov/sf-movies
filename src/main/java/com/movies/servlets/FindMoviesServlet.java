@@ -15,7 +15,7 @@ import java.util.List;
  * This servlet using in auto-complete feature.
  * Returns movies matched with phrase.
  */
-public class SuggestMoviesNamesServlet extends HttpServlet {
+public class FindMoviesServlet extends HttpServlet {
 
     private static final int LIMIT = 10;
 

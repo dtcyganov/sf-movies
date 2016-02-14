@@ -47,7 +47,7 @@ public class Main {
 //        Collection<Movie> movies = readMovies(DATA_WITH_GEO_FILE_PATH);
         removeMoviesWithoutGoodLocations(movies);
         Exporter exporter = new Exporter();
-        exporter.putMoviesToService(movies, "http://localhost:8080/api/v1/movie");
+        exporter.putMoviesToService(movies, "http://sf-movies-1212.appspot.com/servlets/v1/movie");
     }
 
     private static void removeMoviesWithoutGoodLocations(Collection<Movie> readMovies) {
